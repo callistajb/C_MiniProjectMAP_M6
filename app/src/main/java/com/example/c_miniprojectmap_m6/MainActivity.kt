@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.app.AlertDialog
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -87,6 +86,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        //List View
         recyclerView.adapter = movieAdapter
         recyclerView.layoutManager =
             LinearLayoutManager(
@@ -211,7 +211,7 @@ class MainActivity : AppCompatActivity() {
                     .setTitle("Select movie to add")
                     .setItems(movieTitles) { _, which ->
                         val selectedMovie = remainingMovies[which]
-                        movieAdapter.addItem(selectedMovie)
+                        movieAdapter.addItem(selectedMovie, recyclerView)
                         remainingMovies.removeAt(which)
                     }
                     .show()

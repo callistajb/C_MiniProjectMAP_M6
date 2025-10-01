@@ -21,9 +21,10 @@ class MovieAdapter(
         notifyDataSetChanged()
     }
 
-    fun addItem(movie: MovieModel) {
-        movies.add(0, movie)
+    fun addItem(movie: MovieModel, recyclerView: RecyclerView) {
+        movies.add(0,movie)
         notifyItemInserted(0)
+        recyclerView.scrollToPosition(0)
     }
 
     fun removeItem(position: Int) {
@@ -59,7 +60,7 @@ class MovieAdapter(
         ): Boolean = false
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            val position = viewHolder.adapterPosition
+            val position = viewHolder.bindingAdapterPosition
             removeItem(position)
         }
     }

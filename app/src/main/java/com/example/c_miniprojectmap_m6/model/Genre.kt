@@ -1,7 +1,5 @@
 package com.example.c_miniprojectmap_m6.model
 
-import android.view.Display
-
 enum class Genre (val displayName: String) {
     ACTION("Action"),
     ADVENTURE("Adventure"),
