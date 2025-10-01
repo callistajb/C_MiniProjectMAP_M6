@@ -8,12 +8,12 @@ import com.example.c_miniprojectmap_m6.model.MovieModel
 import com.example.c_miniprojectmap_m6.model.Type
 
 private const val SYNOPSIS_PREVIEW = 70
-
 class MovieViewHolder(
     private val containerView: View,
     private val imageLoader: ImageLoader,
     private val onClickListener: MovieAdapter.OnClickListener
 ) : RecyclerView.ViewHolder(containerView) {
+
     private val posterView: ImageView by lazy {
         containerView.findViewById(R.id.movie_poster)
     }
@@ -21,6 +21,7 @@ class MovieViewHolder(
     private val titleView: TextView by lazy {
         containerView.findViewById(R.id.movie_title)
     }
+
     private val typeYearView: TextView by lazy {
         containerView.findViewById(R.id.movie_type_year)
     }
@@ -28,6 +29,7 @@ class MovieViewHolder(
     private val genreView: TextView by lazy {
         containerView.findViewById(R.id.movie_genre)
     }
+
     private val synopsisView: TextView by lazy {
         containerView.findViewById(R.id.movie_synopsis)
     }

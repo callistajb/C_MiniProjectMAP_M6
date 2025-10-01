@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.app.AlertDialog
-import android.view.animation.Animation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.c_miniprojectmap_m6.model.MovieModel
 import com.example.c_miniprojectmap_m6.model.Genre
 import com.example.c_miniprojectmap_m6.model.Type
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     private val recyclerView: RecyclerView by lazy {
@@ -25,6 +25,57 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private val newMovies = listOf(
+        MovieModel(
+            title = "Atonement",
+            type = Type.Movie,
+            year = "2007",
+            genre = listOf(Genre.ROMANCE, Genre.DRAMA, Genre.WAR),
+            synopsis = "As a 13-year-old, fledgling writer Briony Tallis irrevocably changes the course of several lives when she accuses her older sister’s lover of a crime he did not commit.",
+            imageUrl = "https://a.ltrbxd.com/resized/sm/upload/44/vx/ah/pc/quaWuwYZd8IbZMCOhW3CZEvyCWJ-0-2000-0-3000-crop.jpg?v=690eaa9389",
+            cast = listOf("James McAvoy", "Keira Knightley", "Soirse Ronan")
+        ),
+        MovieModel(
+            "Pet Sematary II",
+            Type.Movie,
+            "1992",
+            listOf(Genre.HORROR),
+            "The “sematary” is up to its old zombie-raising tricks again. This time, the protagonists are Jeff Matthews, whose mother died in a Hollywood stage accident, and Drew Gilbert, a boy coping with an abusive stepfather.",
+            "https://a.ltrbxd.com/resized/film-poster/4/5/7/8/6/45786-pet-sematary-ii-0-2000-0-3000-crop.jpg?v=0b5e53caee",
+            listOf("Edward Furlong, Anthony Edward, Clancy Brown")
+        ),
+        MovieModel(
+            title="Black Swan",
+            Type.Movie,
+            year = "2010",
+            genre = listOf(Genre.DRAMA, Genre.THRILLER, Genre.HORROR),
+            synopsis = "The story of Nina, a ballerina in a New York City ballet company whose life, like all those in her profession, is completely consumed with dance. She lives with her retired ballerina mother Erica who zealously supports her daughter’s professional ambition. When artistic director Thomas Leroy decides to replace prima ballerina Beth MacIntyre for the opening production of their new season, Swan Lake, Nina is his first choice.",
+            imageUrl = "https://a.ltrbxd.com/resized/sm/upload/yt/ae/iz/kj/bIjkE9Og0nulRycj144sCcQcsZ6-0-2000-0-3000-crop.jpg?v=a571e4c644",
+            cast = listOf("Natalie Portman", "Mila Kunis", "Vincent Cassel")
+        ),
+        MovieModel(
+            "The Devil All the Time",
+            Type.Movie,
+            "2020",
+            listOf(Genre.CRIME, Genre.DRAMA, Genre.THRILLER),
+            "Everyone ends up in the same damned place. In Knockemstiff, Ohio and its neighboring backwoods, sinister characters converge around young Arvin Russell as he fights the evil forces that threaten him and his family.",
+            "https://a.ltrbxd.com/resized/film-poster/4/2/9/9/4/5/429945-the-devil-all-the-time-0-2000-0-3000-crop.jpg?v=4b048ec678",
+            listOf("Tom Holland, Robert Pattinson, Bill Skarsgård")
+        ),
+        MovieModel(
+            "Hannibal",
+            Type.TVSeries,
+            "2013-2015",
+            listOf(Genre.THRILLER, Genre.MYSTERY),
+            "Explores the early relationship between renowned psychiatrist Hannibal Lecter and a young FBI criminal profiler who is haunted by his ability to empathize with serial killers.",
+            "https://static1.srcdn.com/wordpress/wp-content/uploads/trailers/episode_poster/20559_Season%201.jpg",
+            listOf("Hugh Dancy, Mads Mikkelsen, Caroline Dhavernas")
+        )
+    )
+
+    private val remainingMovies = newMovies.toMutableList()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,7 +87,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         recyclerView.adapter = movieAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(
+                this,
+                RecyclerView.VERTICAL,
+                false
+            )
 
         val itemTouchHelper = ItemTouchHelper(movieAdapter.swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
@@ -80,15 +136,6 @@ class MainActivity : AppCompatActivity() {
                     listOf("Brad Pitt, Melanie Laurent, Christoph Waltz")
                 ),
                 MovieModel(
-                    "Hannibal",
-                    Type.TVSeries,
-                    "2013-2015",
-                    listOf(Genre.THRILLER, Genre.MYSTERY),
-                    "Explores the early relationship between renowned psychiatrist Hannibal Lecter and a young FBI criminal profiler who is haunted by his ability to empathize with serial killers.",
-                    "https://static1.srcdn.com/wordpress/wp-content/uploads/trailers/episode_poster/20559_Season%201.jpg",
-                    listOf("Hugh Dancy, Mads Mikkelsen, Caroline Dhavernas")
-                ),
-                MovieModel(
                     "Pretty Woman",
                     Type.Movie,
                     "1990",
@@ -125,15 +172,6 @@ class MainActivity : AppCompatActivity() {
                     listOf("Barry Keoghan, Jacob Elordi, Rosamund Pike")
                 ),
                 MovieModel(
-                    "The Devil All the Time",
-                    Type.Movie,
-                    "2020",
-                    listOf(Genre.CRIME, Genre.DRAMA, Genre.THRILLER),
-                    "Everyone ends up in the same damned place. In Knockemstiff, Ohio and its neighboring backwoods, sinister characters converge around young Arvin Russell as he fights the evil forces that threaten him and his family.",
-                    "https://a.ltrbxd.com/resized/film-poster/4/2/9/9/4/5/429945-the-devil-all-the-time-0-2000-0-3000-crop.jpg?v=4b048ec678",
-                    listOf("Tom Holland, Robert Pattinson, Bill Skarsgård")
-                ),
-                MovieModel(
                     "Eyes Wide Shut",
                     Type.Movie,
                     "1999",
@@ -159,18 +197,31 @@ class MainActivity : AppCompatActivity() {
                     "The only thing crazier than love is family. An American-born Chinese economics professor accompanies her boyfriend to Singapore for his best friend’s wedding, only to get thrust into the lives of Asia’s rich and famous.",
                     "https://a.ltrbxd.com/resized/film-poster/3/8/7/2/3/8/387238-crazy-rich-asians-0-2000-0-3000-crop.jpg?v=21695f4b1f",
                     listOf("Constance Wu, Henry Golding, Michelle Yeoh")
-                ),
-                MovieModel(
-                    "Pet Sematary II",
-                    Type.Movie,
-                    "1992",
-                    listOf(Genre.HORROR),
-                    "The “sematary” is up to its old zombie-raising tricks again. This time, the protagonists are Jeff Matthews, whose mother died in a Hollywood stage accident, and Drew Gilbert, a boy coping with an abusive stepfather.",
-                    "https://a.ltrbxd.com/resized/film-poster/4/5/7/8/6/45786-pet-sematary-ii-0-2000-0-3000-crop.jpg?v=0b5e53caee",
-                    listOf("Edward Furlong, Anthony Edward, Clancy Brown")
                 )
             )
         )
+
+        val fab: FloatingActionButton = findViewById(R.id.fab)
+        fab.setOnClickListener {
+            if (remainingMovies.isNotEmpty()) {
+                val movieTitles = remainingMovies.map { it.title }.toTypedArray()
+
+                AlertDialog.Builder(this)
+                    .setTitle("Select movie to add")
+                    .setItems(movieTitles) { _, which ->
+                        val selectedMovie = remainingMovies[which]
+                        movieAdapter.addItem(selectedMovie)
+                        remainingMovies.removeAt(which)
+                    }
+                    .show()
+            } else {
+                AlertDialog.Builder(this)
+                    .setTitle("No movies available")
+                    .setMessage("All movies have already been added.")
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+        }
     }
 
     private fun showMovieDialog(movie: MovieModel) {

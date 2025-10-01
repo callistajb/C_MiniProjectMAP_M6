@@ -11,7 +11,8 @@ class MovieAdapter(
     private val imageLoader: ImageLoader,
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<MovieViewHolder>() {
-    private var movies: MutableList<MovieModel> = mutableListOf()
+
+    private val movies: MutableList<MovieModel> = mutableListOf()
     val swipeToDeleteCallback = SwipeToDeleteCallback()
 
     fun setData(newMovies: List<MovieModel>) {
@@ -38,7 +39,6 @@ class MovieAdapter(
     }
 
     override fun getItemCount() = movies.size
-
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bindData(movies[position])
     }
